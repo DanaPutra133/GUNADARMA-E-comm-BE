@@ -13,10 +13,12 @@ const addProductReview = async (req, res) => {
       // orderStatus: "confirmed" || "delivered",
     });
 
-    if (!order) {
+    //buat dia false ketika ingin review bisa di gunakan oleh user yang tidak membeli barang
+    //tambahin aja ! anjay 
+    if (order) {
       return res.status(403).json({
         success: false,
-        message: "You need to purchase product to review it.",
+        message: "kamu harus membeli barang nya dulu untuk mereview.",
       });
     }
 
@@ -28,7 +30,7 @@ const addProductReview = async (req, res) => {
     if (checkExistinfReview) {
       return res.status(400).json({
         success: false,
-        message: "You already reviewed this product!",
+        message: "kamu sudah mereview barang ini!",
       });
     }
 
