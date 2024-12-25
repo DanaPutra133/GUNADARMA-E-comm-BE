@@ -9,7 +9,7 @@ const getFilteredProducts = async (req, res) => {
     if (category.length) {
       filters.category = { $in: category.split(",") };
     }
-
+// biang kerok di sini tadi
     let sort = {};
 
     switch (sortBy) {
