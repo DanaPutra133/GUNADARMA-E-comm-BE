@@ -47,6 +47,8 @@ const getFilteredProducts = async (req, res) => {
       data: products,
     });
   } catch (e) {
+    // ini kenapa dah kalau error gak bisa?
+    // ganti aja jadi e 
     console.log(e);
     res.status(500).json({
       success: false,
