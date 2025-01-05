@@ -119,7 +119,7 @@ const capturePayment = async (req, res) => {
       if (!product) {
         return res.status(404).json({
           success: false,
-          message: `Not enough stock for this product ${product.title}`,
+          message: `stok habis! ${product.title}`,
         });
       }
 
