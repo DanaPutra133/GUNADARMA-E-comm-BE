@@ -2,7 +2,8 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const User = require("../../models/User");
 
-//register
+//register control saat login 
+//semua nya di sini jangan di ganti ganti status nya debug nya bingung gua
 const registerUser = async (req, res) => {
   const { userName, email, password } = req.body;
 
@@ -11,7 +12,7 @@ const registerUser = async (req, res) => {
     if (checkUser)
       return res.json({
         success: false,
-        message: "User Already exists with the same email! Please try again",
+        message: `email ${email} telah terdaftar! gunakan email lain`,
       });
 
     const hashPassword = await bcrypt.hash(password, 12);
@@ -24,7 +25,7 @@ const registerUser = async (req, res) => {
     await newUser.save();
     res.status(200).json({
       success: true,
-      message: "Registration successful",
+      message: `registrasi suskses! selamat datang *${userName}*`,
     });
   } catch (e) {
     console.log(e);
@@ -35,7 +36,7 @@ const registerUser = async (req, res) => {
   }
 };
 
-//login
+/* bagian login user */
 const loginUser = async (req, res) => {
   const { email, password } = req.body;
 
@@ -44,7 +45,7 @@ const loginUser = async (req, res) => {
     if (!checkUser)
       return res.json({
         success: false,
-        message: "User doesn't exists! Please register first",
+        message: "email tidak terdaftar! silahkan registrasi dulu",
       });
 
     const checkPasswordMatch = await bcrypt.compare(
@@ -54,9 +55,9 @@ const loginUser = async (req, res) => {
     if (!checkPasswordMatch)
       return res.json({
         success: false,
-        message: "Incorrect password! Please try again",
+        message: "password salah! ulangi lagi",
       });
-
+      /* mulai dari sini variabel nya pakai yang checkUser kalau mau di get */
     const token = jwt.sign(
       {
         id: checkUser._id,
@@ -67,10 +68,10 @@ const loginUser = async (req, res) => {
       "CLIENT_SECRET_KEY",
       { expiresIn: "60m" }
     );
-
+    //cek user sebagai siapa login nya
     res.cookie("token", token, { httpOnly: true, secure: false }).json({
       success: true,
-      message: "Logged in successfully",
+      message: `Sukses login sebagai *${checkUser.userName}* dengan role *${checkUser.role}*`,
       user: {
         email: checkUser.email,
         role: checkUser.role,
@@ -87,12 +88,12 @@ const loginUser = async (req, res) => {
   }
 };
 
-//logout
+//logout nya
 
 const logoutUser = (req, res) => {
   res.clearCookie("token").json({
     success: true,
-    message: "Logged out successfully!",
+    message: "logout sukses!",
   });
 };
 
@@ -102,7 +103,7 @@ const authMiddleware = async (req, res, next) => {
   if (!token)
     return res.status(401).json({
       success: false,
-      message: "Unauthorised user!",
+      message: "ini buat user mildelware!",
     });
 
   try {
@@ -112,7 +113,7 @@ const authMiddleware = async (req, res, next) => {
   } catch (error) {
     res.status(401).json({
       success: false,
-      message: "Unauthorised user!",
+      message: "user tiakdipercaya!",
     });
   }
 };

@@ -7,7 +7,7 @@ const getAllOrdersOfAllUsers = async (req, res) => {
     if (!orders.length) {
       return res.status(404).json({
         success: false,
-        message: "No orders found!",
+        message: "tidak ada orderan!",
       });
     }
 
@@ -33,7 +33,7 @@ const getOrderDetailsForAdmin = async (req, res) => {
     if (!order) {
       return res.status(404).json({
         success: false,
-        message: "Order not found!",
+        message: "order tidak di temukan!!",
       });
     }
 
@@ -45,7 +45,7 @@ const getOrderDetailsForAdmin = async (req, res) => {
     console.log(e);
     res.status(500).json({
       success: false,
-      message: "Some error occured!",
+      message: "sesuatu terdapat masalah!",
     });
   }
 };
@@ -60,7 +60,7 @@ const updateOrderStatus = async (req, res) => {
     if (!order) {
       return res.status(404).json({
         success: false,
-        message: "Order not found!",
+        message: "pesanan tidak di temukan!",
       });
     }
 
@@ -68,7 +68,7 @@ const updateOrderStatus = async (req, res) => {
 
     res.status(200).json({
       success: true,
-      message: "Order status is updated successfully!",
+      message: "status order telah di perbarui!",
     });
   } catch (e) {
     console.log(e);
