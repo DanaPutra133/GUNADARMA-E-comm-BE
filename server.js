@@ -20,7 +20,8 @@ const commonFeatureRouter = require("./routes/common/feature-routes");
 
 //middelware nya lawak ke mongose 
 mongoose
-  .connect("mongodb+srv://danaputra1001:aquachan123@cluster0.dllht.mongodb.net/")
+  //isi dengan url mongodb kamu
+  .connect("")
   .then(() => console.log("MongoDB connected"))
   .catch((error) => console.log(error));
 
