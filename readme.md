@@ -30,7 +30,9 @@ Merupakan sebuah backend dari UNADARMA E-comm FE, menggunakan mongodb untuk data
 
 ## Catatan
 
-Frontend sudah harus di jalankan agar dapat menggunakan website dengan maksimal!
+- Frontend sudah harus di jalankan agar dapat menggunakan website dengan maksimal!
+
+- isi bagian connect di server.js dengan url mongodb kamu agar terhubung!
 
 ## Documentantion
 
