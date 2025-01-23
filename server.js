@@ -19,7 +19,6 @@ const commonFeatureRouter = require("./routes/common/feature-routes");
 //create a separate file for this and then import/use that file here
 
 //middelware nya lawak ke mongose 
-//isi sama akun mongodb
 mongoose
   .connect("mongodb+srv://danaputra1001:aquachan123@cluster0.dllht.mongodb.net/")
   .then(() => console.log("MongoDB connected"))
@@ -30,7 +29,7 @@ const PORT = process.env.PORT || 5004;
 
 app.use(
   cors({
-    origin: "https://tugas.danafxc.my.id",
+    origin: "http://localhost:5173",
     methods: ["GET", "POST", "DELETE", "PUT"],
     allowedHeaders: [
       "Content-Type",
